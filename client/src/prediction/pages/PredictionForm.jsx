@@ -5,7 +5,7 @@ import { createPrediction } from "../services/predictionService";
 import PredictionQuestions from "../components/PredictionQuestions";
 import PredictionLayout from "../layouts/PredictionLayout";
 import countryConfigs from "../data/countryConfigs";
-import { FormIllustration } from "../components/VisaIllustrations";
+import { FormIllustration } from "../components/Visaillustrations";
 
 // ─────────────────────────────────────────────
 // STEPS CONFIG

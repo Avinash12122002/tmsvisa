@@ -1,6 +1,6 @@
 import PredictionLayout from "../layouts/PredictionLayout";
 import CountrySelector from "../components/CountrySelector";
-import { HomeIllustration } from "../components/VisaIllustrations";
+import { HomeIllustration } from "../components/Visaillustrations";
 
 const STATS = [
   { value: "94%",  label: "Accuracy"         },

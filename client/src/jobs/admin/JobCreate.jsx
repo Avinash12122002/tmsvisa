@@ -136,6 +136,7 @@ export default function JobCreate() {
         </button>
       </form>
       </div>
-      </AdminJobLayout>
+    </AdminJobLayout>
+    
   );
 }
