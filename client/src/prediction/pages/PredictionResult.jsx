@@ -4,7 +4,7 @@ import ScoreCircle from "../components/ScoreCircle";
 import RiskMeter from "../components/RiskMeter";
 import { StrengthCard, WeaknessCard, SuggestionCard } from "../components/Cards";
 import AIAnalysisBox from "../components/AIAnalysisBox";
-import { ResultIllustration } from "../components/VisaIllustrations";
+import { ResultIllustration } from "../components/Visaillustrations";
 
 // ─────────────────────────────────────────────
 // Section wrapper
