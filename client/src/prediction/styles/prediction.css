@@ -1,0 +1,94 @@
+/* ═══════════════════════════════════════════════
+   prediction.css
+   Scoped styles for the Prediction module.
+   All component-level styles live in Tailwind;
+   this file handles animations, custom
+   scrollbars, and utilities Tailwind can't do.
+═══════════════════════════════════════════════ */
+
+/* ── Smooth page transitions ── */
+.prediction-fade-in {
+  animation: predFadeIn 0.35s ease both;
+}
+@keyframes predFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+/* ── Step slide animation ── */
+.step-enter {
+  animation: stepEnter 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+@keyframes stepEnter {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+
+/* ── Score circle arc ── */
+.score-arc {
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── AI typewriter cursor ── */
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: #60a5fa;
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink 0.8s step-end infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ── Custom scrollbar for the form card ── */
+.prediction-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.prediction-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.prediction-scroll::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 99px;
+}
+.prediction-scroll::-webkit-scrollbar-thumb:hover {
+  background: #93c5fd;
+}
+
+/* ── Gradient text utility ── */
+.gradient-text {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Card hover lift ── */
+.card-lift {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px -12px rgba(59, 130, 246, 0.15);
+}
+
+/* ── Strength bar animation ── */
+.strength-bar-fill {
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Risk meter pointer ── */
+.risk-pointer {
+  transition: left 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Print styles ── */
+@media print {
+  header, footer, .no-print { display: none !important; }
+  body { background: white !important; }
+  .bg-gradient-to-br { background: white !important; }
+}
