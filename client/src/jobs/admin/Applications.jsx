@@ -78,7 +78,7 @@ export default function Applications() {
 
                 <td className="border p-3">
                   <a
-                    href={`http://localhost:5000/${item.resume}`}
+                    href={`https://tmsvisa-backend.onrender.com/${item.resume}`}
                     target="_blank"
                     rel="noreferrer"
                     className="text-blue-600"

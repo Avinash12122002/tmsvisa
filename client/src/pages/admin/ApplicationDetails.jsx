@@ -10,7 +10,7 @@ import { getApplication } from "../../services/applicationService";
 // API URL
 // ======================
 
-const API = "http://localhost:5000/";
+const API = "https://tmsvisa-backend.onrender.com/";
 
 const BASE_URL =
   API.replace("/api", "")
