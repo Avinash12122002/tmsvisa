@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import AdminLayout from "../../layouts/AdminLayout";
+import AdminLayout from "../../pages/admin/layouts/AdminLayout";
 
 import useLeads from "../hooks/useLeads";
 
