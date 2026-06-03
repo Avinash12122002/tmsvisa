@@ -1,17 +1,47 @@
+import { useState } from "react";
+
 import AdminLayout from "../../pages/admin/layouts/AdminLayout";
 
 import useLeads from "../hooks/useLeads";
 
 import LeadTable from "../components/LeadTable";
 
+import UpdateLeadModal from "../components/UpdateLeadModal";
+
+import { deleteLead } from "../api/leadApi";
+
 export default function WorkVisaLeads() {
 
-  const {
-    leads,
-    loading,
-  } = useLeads({
+  const { leads, loading, refresh } = useLeads({
     service: "Work Visa",
   });
+
+  const [selectedLead, setSelectedLead] =
+    useState(null);
+
+  const handleDelete = async (id) => {
+
+    const confirmDelete =
+      window.confirm(
+        "Delete this lead?"
+      );
+
+    if (!confirmDelete) return;
+
+    try {
+
+      await deleteLead(id);
+
+      refresh();
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert("Failed to delete lead");
+
+    }
+  };
 
   return (
     <AdminLayout>
@@ -31,15 +61,34 @@ export default function WorkVisaLeads() {
         </div>
 
         {loading ? (
+
           <div className="bg-white p-10 rounded-2xl shadow text-center">
             Loading...
           </div>
+
         ) : (
+
           <LeadTable
             leads={leads}
-            onView={() => {}}
-            onDelete={() => {}}
+            onView={setSelectedLead}
+            onDelete={handleDelete}
           />
+
+        )}
+
+        {selectedLead && (
+
+          <UpdateLeadModal
+            lead={selectedLead}
+            onClose={() =>
+              setSelectedLead(null)
+            }
+            onUpdated={() => {
+              refresh();
+              setSelectedLead(null);
+            }}
+          />
+
         )}
 
       </div>

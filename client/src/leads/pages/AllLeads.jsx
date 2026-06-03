@@ -30,8 +30,8 @@ export default function AllLeads() {
     setSearch,
   ] = useState("");
 
-  const filteredLeads =
-    leads.filter((lead) => {
+ const filteredLeads =
+  (leads || []).filter((lead) => {
 
       const text = `
         ${lead.name}
