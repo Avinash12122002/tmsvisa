@@ -26,18 +26,14 @@ const JobsRoutes = () => {
       <Route
         path="/job/:id"
         element={
-          <ProtectedRoute>
             <JobDetails />
-          </ProtectedRoute>
         }
       />
 
       <Route
         path="/jobs/apply/:id"
         element={
-          <ProtectedRoute>
             <ApplyJob />
-          </ProtectedRoute>
         }
       />
 
