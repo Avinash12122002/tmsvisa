@@ -6,29 +6,59 @@ export default function AdminLayout({
 }) {
   return (
     <div
-      style={{
-        display: "flex",
-        minHeight: "100vh",
-        background: "#F5F7FB",
-      }}
+      className="
+        min-h-screen
+        bg-slate-100
+      "
     >
+      {/* Sidebar */}
+
       <AdminSidebar />
 
+      {/* Main Content */}
+
       <div
-        style={{
-          marginLeft: 210,  // ← add this
-          flex: 1,
-        }}
+        className="
+          ml-[250px]
+          min-h-screen
+          flex
+          flex-col
+        "
       >
-        <Topbar />
+        {/* Topbar */}
 
         <div
-          style={{
-            padding: 24,
-          }}
+          className="
+            sticky
+            top-0
+            z-30
+            bg-white
+            border-b
+            border-slate-200
+            shadow-sm
+          "
         >
-          {children}
+          <Topbar />
         </div>
+
+        {/* Page Content */}
+
+        <main
+          className="
+            flex-1
+            p-6
+            lg:p-8
+          "
+        >
+          <div
+            className="
+              max-w-[1600px]
+              mx-auto
+            "
+          >
+            {children}
+          </div>
+        </main>
       </div>
     </div>
   );
