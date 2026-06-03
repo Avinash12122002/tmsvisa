@@ -54,6 +54,10 @@ export default function LeadTable({
               </th>
 
               <th className="px-4 py-4 text-left text-sm font-semibold">
+                Notes
+              </th>
+
+              <th className="px-4 py-4 text-left text-sm font-semibold">
                 Created
               </th>
 
@@ -98,6 +102,12 @@ export default function LeadTable({
                   <LeadStatusBadge
                     status={lead.status}
                   />
+                </td>
+
+                <td className="px-4 py-4 max-w-[250px]">
+                  <div className="truncate">
+                    {lead.notes || "-"}
+                  </div>
                 </td>
 
                 <td className="px-4 py-4">
