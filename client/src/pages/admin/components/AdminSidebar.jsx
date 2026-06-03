@@ -31,20 +31,20 @@ const menus = [
 export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
   const location = useLocation();
 
-  const [showJobs, setShowJobs] = useState(false);
-
   const [showLeads, setShowLeads] = useState(false);
 
+  const [showJobs, setShowJobs] = useState(false);
+
   useEffect(() => {
+    if (location.pathname.includes("/admin/leads")) {
+      setShowLeads(true);
+    }
+
     if (
       location.pathname.includes("/admin/jobs") ||
       location.pathname.includes("/admin/job")
     ) {
       setShowJobs(true);
-    }
-
-    if (location.pathname.includes("/admin/leads")) {
-      setShowLeads(true);
     }
   }, [location.pathname]);
 
@@ -58,10 +58,11 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
     display: "block",
     padding: "14px 18px",
     borderRadius: 12,
-    marginBottom: 10,
+    marginBottom: 8,
     textDecoration: "none",
     color: "#fff",
-    fontWeight: location.pathname === path ? 600 : 400,
+    fontSize: 15,
+    fontWeight: location.pathname === path ? 600 : 500,
     background: location.pathname === path ? "#2563EB" : "transparent",
   });
 
@@ -70,15 +71,17 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
     padding: "10px 14px",
     borderRadius: 10,
     marginBottom: 6,
-    marginLeft: 15,
+    marginLeft: 16,
     textDecoration: "none",
+    fontSize: 14,
     color: location.pathname === path ? "#fff" : "#CBD5E1",
     background: location.pathname === path ? "#1E40AF" : "transparent",
-    fontSize: 14,
   });
 
   return (
     <>
+      {/* Overlay */}
+
       {sidebarOpen && (
         <div
           className="
@@ -92,16 +95,17 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
         />
       )}
 
+      {/* Sidebar */}
+
       <aside
         className={`
           fixed
           top-0
           left-0
           h-screen
-          w-[250px]
+          w-[280px]
           bg-slate-950
           text-white
-          p-6
           overflow-y-auto
           z-50
           transition-transform
@@ -129,149 +133,157 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
 
         {/* Logo */}
 
-        <h2 className="text-3xl font-bold mb-10">Visa CRM</h2>
+        <div className="p-6 border-b border-slate-800">
+          <h1 className="text-3xl font-bold">Visa CRM</h1>
 
-        {/* Main Menu */}
+          <p className="text-slate-400 text-sm mt-1">Admin Dashboard</p>
+        </div>
 
-        {menus.map((menu) => (
-          <Link
-            key={menu.path}
-            to={menu.path}
-            style={menuStyle(menu.path)}
-            onClick={closeMobileSidebar}
+        {/* Menu Area */}
+
+        <div className="p-4">
+          {menus.map((menu) => (
+            <Link
+              key={menu.path}
+              to={menu.path}
+              style={menuStyle(menu.path)}
+              onClick={closeMobileSidebar}
+            >
+              {menu.label}
+            </Link>
+          ))}
+
+          {/* Leads */}
+
+          <button
+            onClick={() => setShowLeads(!showLeads)}
+            className="
+              w-full
+              flex
+              justify-between
+              items-center
+              bg-slate-800
+              px-4
+              py-3
+              rounded-xl
+              mt-4
+              mb-2
+            "
           >
-            {menu.label}
-          </Link>
-        ))}
+            <span>🎯 Leads</span>
 
-        {/* Leads */}
+            <span>{showLeads ? "▼" : "▶"}</span>
+          </button>
 
-        <button
-          onClick={() => setShowLeads(!showLeads)}
-          className="
-            w-full
-            flex
-            justify-between
-            items-center
-            bg-slate-800
-            px-4
-            py-3
-            rounded-xl
-            mt-4
-            mb-2
-          "
-        >
-          <span>🎯 Leads</span>
-          <span>{showLeads ? "▼" : "▶"}</span>
-        </button>
+          {showLeads && (
+            <div className="mb-4">
+              <Link
+                to="/admin/leads-dashboard"
+                style={subMenuStyle("/admin/leads-dashboard")}
+                onClick={closeMobileSidebar}
+              >
+                Lead Dashboard
+              </Link>
 
-        {showLeads && (
-          <div className="mb-4">
-            <Link
-              to="/admin/leads-dashboard"
-              style={subMenuStyle("/admin/leads-dashboard")}
-              onClick={closeMobileSidebar}
-            >
-              Lead Dashboard
-            </Link>
+              <Link
+                to="/admin/leads"
+                style={subMenuStyle("/admin/leads")}
+                onClick={closeMobileSidebar}
+              >
+                All Leads
+              </Link>
 
-            <Link
-              to="/admin/leads"
-              style={subMenuStyle("/admin/leads")}
-              onClick={closeMobileSidebar}
-            >
-              All Leads
-            </Link>
+              <Link
+                to="/admin/leads/work-visa"
+                style={subMenuStyle("/admin/leads/work-visa")}
+                onClick={closeMobileSidebar}
+              >
+                Work Visa Leads
+              </Link>
 
-            <Link
-              to="/admin/leads/work-visa"
-              style={subMenuStyle("/admin/leads/work-visa")}
-              onClick={closeMobileSidebar}
-            >
-              Work Visa Leads
-            </Link>
+              <Link
+                to="/admin/leads/tourist-visa"
+                style={subMenuStyle("/admin/leads/tourist-visa")}
+                onClick={closeMobileSidebar}
+              >
+                Tourist Visa Leads
+              </Link>
 
-            <Link
-              to="/admin/leads/tourist-visa"
-              style={subMenuStyle("/admin/leads/tourist-visa")}
-              onClick={closeMobileSidebar}
-            >
-              Tourist Visa Leads
-            </Link>
+              <Link
+                to="/admin/leads/visa-ai"
+                style={subMenuStyle("/admin/leads/visa-ai")}
+                onClick={closeMobileSidebar}
+              >
+                Visa AI Leads
+              </Link>
 
-            <Link
-              to="/admin/leads/visa-ai"
-              style={subMenuStyle("/admin/leads/visa-ai")}
-              onClick={closeMobileSidebar}
-            >
-              Visa AI Leads
-            </Link>
+              <Link
+                to="/admin/leads/visa-courses"
+                style={subMenuStyle("/admin/leads/visa-courses")}
+                onClick={closeMobileSidebar}
+              >
+                Visa Course Leads
+              </Link>
+            </div>
+          )}
 
-            <Link
-              to="/admin/leads/visa-courses"
-              style={subMenuStyle("/admin/leads/visa-courses")}
-              onClick={closeMobileSidebar}
-            >
-              Visa Course Leads
-            </Link>
-          </div>
-        )}
+          {/* Jobs */}
 
-        {/* Jobs */}
+          <button
+            onClick={() => setShowJobs(!showJobs)}
+            className="
+              w-full
+              flex
+              justify-between
+              items-center
+              bg-slate-800
+              px-4
+              py-3
+              rounded-xl
+              mb-2
+            "
+          >
+            <span>💼 Jobs</span>
 
-        <button
-          onClick={() => setShowJobs(!showJobs)}
-          className="
-            w-full
-            flex
-            justify-between
-            items-center
-            bg-slate-800
-            px-4
-            py-3
-            rounded-xl
-            mb-2
-          "
-        >
-          <span>💼 Jobs</span>
-          <span>{showJobs ? "▼" : "▶"}</span>
-        </button>
+            <span>{showJobs ? "▼" : "▶"}</span>
+          </button>
 
-        {showJobs && (
-          <div>
-            <Link
-              to="/admin/job-dashboard"
-              style={subMenuStyle("/admin/job-dashboard")}
-              onClick={closeMobileSidebar}
-            >
-              Job Dashboard
-            </Link>
+          {showJobs && (
+            <div>
+              <Link
+                to="/admin/job-dashboard"
+                style={subMenuStyle("/admin/job-dashboard")}
+                onClick={closeMobileSidebar}
+              >
+                Job Dashboard
+              </Link>
 
-            <Link
-              to="/admin/jobs"
-              style={subMenuStyle("/admin/jobs")}
-              onClick={closeMobileSidebar}
-            >
-              Manage Jobs
-            </Link>
+              <Link
+                to="/admin/jobs"
+                style={subMenuStyle("/admin/jobs")}
+                onClick={closeMobileSidebar}
+              >
+                Manage Jobs
+              </Link>
 
-            <Link
-              to="/admin/jobs/create"
-              style={subMenuStyle("/admin/jobs/create")}
-              onClick={closeMobileSidebar}
-            >
-              Create Job
-            </Link>
+              <Link
+                to="/admin/jobs/create"
+                style={subMenuStyle("/admin/jobs/create")}
+                onClick={closeMobileSidebar}
+              >
+                Create Job
+              </Link>
 
-            <Link
-              to="/admin/job-applications"
-              style={subMenuStyle("/admin/job-applications")}
-              onClick={closeMobileSidebar}
-            >
-              Job Applications
-            </Link>
-          </div>
-        )}
+              <Link
+                to="/admin/job-applications"
+                style={subMenuStyle("/admin/job-applications")}
+                onClick={closeMobileSidebar}
+              >
+                Job Applications
+              </Link>
+            </div>
+          )}
+        </div>
       </aside>
     </>
   );

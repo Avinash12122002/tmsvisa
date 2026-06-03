@@ -6,8 +6,9 @@ export default function AdminLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-100">
+    <div className="bg-slate-100 h-screen overflow-hidden">
       {/* Mobile Hamburger */}
+
       <button
         onClick={() => setSidebarOpen(true)}
         className="
@@ -15,7 +16,7 @@ export default function AdminLayout({ children }) {
           fixed
           top-4
           left-4
-          z-[60]
+          z-[100]
           bg-blue-600
           text-white
           w-12
@@ -36,7 +37,7 @@ export default function AdminLayout({ children }) {
       <div
         className="
           md:ml-[280px]
-          min-h-screen
+          h-screen
           flex
           flex-col
         "
@@ -46,6 +47,7 @@ export default function AdminLayout({ children }) {
         <main
           className="
             flex-1
+            overflow-y-auto
             p-4
             md:p-8
           "
