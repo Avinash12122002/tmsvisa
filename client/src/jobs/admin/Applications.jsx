@@ -7,7 +7,7 @@ import {
   getApplications,
   deleteApplication,
 } from "../api/applicationApi";
-import AdminJobLayout from "../components/AdminJobLayout";
+import AdminLayout from "../../pages/admin/layouts/AdminLayout";
 
 export default function Applications() {
   const [
@@ -39,7 +39,7 @@ export default function Applications() {
     };
 
   return (
-    <AdminJobLayout>
+    <AdminLayout>
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">
         Applications
@@ -105,6 +105,6 @@ export default function Applications() {
         </tbody>
       </table>
       </div>
-      </AdminJobLayout>
+      </AdminLayout>
   );
 }

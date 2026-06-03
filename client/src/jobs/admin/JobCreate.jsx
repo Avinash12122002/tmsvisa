@@ -5,7 +5,7 @@ import {
 import {
   createJob,
 } from "../api/jobApi";
-import AdminJobLayout from "../components/AdminJobLayout";
+import AdminLayout from "../../pages/admin/layouts/AdminLayout";
 
 export default function JobCreate() {
   const [form, setForm] =
@@ -53,7 +53,7 @@ export default function JobCreate() {
     };
 
   return (
-    <AdminJobLayout>
+    <AdminLayout>
     <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">
         Create Job
@@ -136,7 +136,7 @@ export default function JobCreate() {
         </button>
       </form>
       </div>
-    </AdminJobLayout>
+    </AdminLayout>
     
   );
 }

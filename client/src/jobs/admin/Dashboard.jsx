@@ -10,7 +10,7 @@ import StatsCard from "../components/StatsCard";
 import {
   getDashboard,
 } from "../api/dashboardApi";
-import AdminJobLayout from "../components/AdminJobLayout";
+import AdminLayout from "../../pages/admin/layouts/AdminLayout";
 
 export default function Dashboard() {
   const [stats, setStats] =
@@ -38,7 +38,7 @@ export default function Dashboard() {
     };
 
   return (
-    <AdminJobLayout>
+    <AdminLayout>
     <div className="p-6">
       
       {/* Header */}
@@ -182,6 +182,6 @@ export default function Dashboard() {
         </div>
       </div>
     </div>
-    </AdminJobLayout>
+    </AdminLayout>
   );
 }

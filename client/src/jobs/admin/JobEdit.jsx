@@ -12,7 +12,7 @@ import {
   getSingleJob,
   updateJob,
 } from "../api/jobApi";
-import AdminJobLayout from "../components/AdminJobLayout";
+import AdminLayout from "../../pages/admin/layouts/AdminLayout";
 
 export default function JobEdit() {
   const { id } =
@@ -51,7 +51,7 @@ export default function JobEdit() {
     };
 
   return (
-    <AdminJobLayout>
+    <AdminLayout>
     <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">
         Edit Job
@@ -97,6 +97,6 @@ export default function JobEdit() {
         </button>
       </form>
       </div>
-      </AdminJobLayout>
+      </AdminLayout>
   );
 }

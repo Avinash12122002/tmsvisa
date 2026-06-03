@@ -11,7 +11,7 @@ import {
 import {
   Link,
 } from "react-router-dom";
-import AdminJobLayout from "../components/AdminJobLayout";
+import AdminLayout from "../../pages/admin/layouts/AdminLayout";
 
 export default function JobList() {
   const [jobs, setJobs] =
@@ -44,7 +44,7 @@ export default function JobList() {
     };
 
   return (
-    <AdminJobLayout>
+    <AdminLayout>
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">
         Jobs
@@ -102,6 +102,6 @@ export default function JobList() {
         </tbody>
       </table>
       </div>
-      </AdminJobLayout>
+      </AdminLayout>
   );
 }
