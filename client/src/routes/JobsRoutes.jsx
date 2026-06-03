@@ -19,9 +19,7 @@ const JobsRoutes = () => {
       <Route
         path="/work-opportunity"
         element={
-          <ProtectedRoute>
             <WorkOpportunity />
-          </ProtectedRoute>
         }
       />
 
