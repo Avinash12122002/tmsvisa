@@ -67,11 +67,7 @@ app.use(helmet());
 
 app.use(
   cors({
-     origin: [
-      "http://localhost:5173",
-      "https://tmsvisa-vr73.vercel.app",
-      "https://tmsvisa-o5wz-8fayzdhlu-akak2805034-1053s-projects.vercel.app",
-    ],
+     origin: true,
 
     credentials: true,
 
