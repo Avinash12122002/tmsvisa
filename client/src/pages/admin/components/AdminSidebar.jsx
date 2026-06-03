@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const menus = [
@@ -35,6 +35,25 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
 
   const [showLeads, setShowLeads] = useState(false);
 
+  useEffect(() => {
+    if (
+      location.pathname.includes("/admin/jobs") ||
+      location.pathname.includes("/admin/job")
+    ) {
+      setShowJobs(true);
+    }
+
+    if (location.pathname.includes("/admin/leads")) {
+      setShowLeads(true);
+    }
+  }, [location.pathname]);
+
+  const closeMobileSidebar = () => {
+    if (window.innerWidth < 768) {
+      setSidebarOpen(false);
+    }
+  };
+
   const menuStyle = (path) => ({
     display: "block",
     padding: "14px 18px",
@@ -42,6 +61,7 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
     marginBottom: 10,
     textDecoration: "none",
     color: "#fff",
+    fontWeight: location.pathname === path ? 600 : 400,
     background: location.pathname === path ? "#2563EB" : "transparent",
   });
 
@@ -54,12 +74,11 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
     textDecoration: "none",
     color: location.pathname === path ? "#fff" : "#CBD5E1",
     background: location.pathname === path ? "#1E40AF" : "transparent",
+    fontSize: 14,
   });
 
   return (
     <>
-      {/* Overlay */}
-
       {sidebarOpen && (
         <div
           className="
@@ -69,11 +88,9 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
             z-40
             md:hidden
           "
-          onClick={() => setSidebarOpen(false)}
+          onClick={closeMobileSidebar}
         />
       )}
-
-      {/* Sidebar */}
 
       <aside
         className={`
@@ -98,7 +115,7 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
         {/* Mobile Close */}
 
         <button
-          onClick={() => setSidebarOpen(false)}
+          onClick={closeMobileSidebar}
           className="
             md:hidden
             absolute
@@ -114,14 +131,14 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
 
         <h2 className="text-3xl font-bold mb-10">Visa CRM</h2>
 
-        {/* Main Menus */}
+        {/* Main Menu */}
 
         {menus.map((menu) => (
           <Link
             key={menu.path}
             to={menu.path}
             style={menuStyle(menu.path)}
-            onClick={() => setSidebarOpen(false)}
+            onClick={closeMobileSidebar}
           >
             {menu.label}
           </Link>
@@ -133,7 +150,9 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
           onClick={() => setShowLeads(!showLeads)}
           className="
             w-full
-            text-left
+            flex
+            justify-between
+            items-center
             bg-slate-800
             px-4
             py-3
@@ -142,7 +161,8 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
             mb-2
           "
         >
-          🎯 Leads
+          <span>🎯 Leads</span>
+          <span>{showLeads ? "▼" : "▶"}</span>
         </button>
 
         {showLeads && (
@@ -150,17 +170,23 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
             <Link
               to="/admin/leads-dashboard"
               style={subMenuStyle("/admin/leads-dashboard")}
+              onClick={closeMobileSidebar}
             >
               Lead Dashboard
             </Link>
 
-            <Link to="/admin/leads" style={subMenuStyle("/admin/leads")}>
+            <Link
+              to="/admin/leads"
+              style={subMenuStyle("/admin/leads")}
+              onClick={closeMobileSidebar}
+            >
               All Leads
             </Link>
 
             <Link
               to="/admin/leads/work-visa"
               style={subMenuStyle("/admin/leads/work-visa")}
+              onClick={closeMobileSidebar}
             >
               Work Visa Leads
             </Link>
@@ -168,6 +194,7 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
             <Link
               to="/admin/leads/tourist-visa"
               style={subMenuStyle("/admin/leads/tourist-visa")}
+              onClick={closeMobileSidebar}
             >
               Tourist Visa Leads
             </Link>
@@ -175,6 +202,7 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
             <Link
               to="/admin/leads/visa-ai"
               style={subMenuStyle("/admin/leads/visa-ai")}
+              onClick={closeMobileSidebar}
             >
               Visa AI Leads
             </Link>
@@ -182,6 +210,7 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
             <Link
               to="/admin/leads/visa-courses"
               style={subMenuStyle("/admin/leads/visa-courses")}
+              onClick={closeMobileSidebar}
             >
               Visa Course Leads
             </Link>
@@ -194,7 +223,9 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
           onClick={() => setShowJobs(!showJobs)}
           className="
             w-full
-            text-left
+            flex
+            justify-between
+            items-center
             bg-slate-800
             px-4
             py-3
@@ -202,7 +233,8 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
             mb-2
           "
         >
-          💼 Jobs
+          <span>💼 Jobs</span>
+          <span>{showJobs ? "▼" : "▶"}</span>
         </button>
 
         {showJobs && (
@@ -210,17 +242,23 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
             <Link
               to="/admin/job-dashboard"
               style={subMenuStyle("/admin/job-dashboard")}
+              onClick={closeMobileSidebar}
             >
               Job Dashboard
             </Link>
 
-            <Link to="/admin/jobs" style={subMenuStyle("/admin/jobs")}>
+            <Link
+              to="/admin/jobs"
+              style={subMenuStyle("/admin/jobs")}
+              onClick={closeMobileSidebar}
+            >
               Manage Jobs
             </Link>
 
             <Link
               to="/admin/jobs/create"
               style={subMenuStyle("/admin/jobs/create")}
+              onClick={closeMobileSidebar}
             >
               Create Job
             </Link>
@@ -228,6 +266,7 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
             <Link
               to="/admin/job-applications"
               style={subMenuStyle("/admin/job-applications")}
+              onClick={closeMobileSidebar}
             >
               Job Applications
             </Link>

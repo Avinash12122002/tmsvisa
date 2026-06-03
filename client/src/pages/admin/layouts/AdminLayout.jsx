@@ -35,7 +35,7 @@ export default function AdminLayout({ children }) {
 
       <div
         className="
-          md:ml-[250px]
+          md:ml-[280px]
           min-h-screen
           flex
           flex-col
