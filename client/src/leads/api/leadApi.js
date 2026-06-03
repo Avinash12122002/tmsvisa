@@ -8,7 +8,7 @@ export const getLeads = async (
 ) => {
   const response =
     await axios.get(
-      `${API_URL}/api/leads`,
+      `${API_URL}/leads`,
       {
         params: filters,
       }
@@ -21,7 +21,7 @@ export const getLeadById =
   async (id) => {
     const response =
       await axios.get(
-        `${API_URL}/api/leads/${id}`
+        `${API_URL}/leads/${id}`
       );
 
     return response.data.data;
@@ -31,7 +31,7 @@ export const updateLead =
   async (id, data) => {
     const response =
       await axios.put(
-        `${API_URL}/api/leads/${id}`,
+        `${API_URL}/leads/${id}`,
         data
       );
 
@@ -42,7 +42,7 @@ export const deleteLead =
   async (id) => {
     const response =
       await axios.delete(
-        `${API_URL}/api/leads/${id}`
+        `${API_URL}/leads/${id}`
       );
 
     return response.data;
