@@ -12,6 +12,8 @@ import PredictionRoutes from "../prediction/routes/PredictionRoutes";
 
 import JobsRoutes from "./JobsRoutes";
 
+import LeadsRoutes from "./LeadsRoutes";
+
 // ======================
 // AUTH PAGES
 // ======================
@@ -268,6 +270,7 @@ const AppRoutes = () => {
         <Route path="/prediction/*" element={<PredictionRoutes />} />
 
         {JobsRoutes()}
+        {LeadsRoutes()}
 
         {/* ======================
               404 PAGE

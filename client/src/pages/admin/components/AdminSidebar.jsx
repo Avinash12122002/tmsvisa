@@ -57,6 +57,35 @@ const menus = [
     label: "Settings",
     path: "/admin/settings",
   },
+  {
+  label: "🎯 Lead Dashboard",
+  path: "/admin/leads-dashboard",
+},
+
+{
+  label: "📋 All Leads",
+  path: "/admin/leads",
+},
+
+{
+  label: "💼 Work Visa Leads",
+  path: "/admin/leads/work-visa",
+},
+
+{
+  label: "✈️ Tourist Visa Leads",
+  path: "/admin/leads/tourist-visa",
+},
+
+{
+  label: "🤖 Visa AI Leads",
+  path: "/admin/leads/visa-ai",
+},
+
+{
+  label: "🎓 Visa Course Leads",
+  path: "/admin/leads/visa-courses",
+},
 ];
 
 export default function AdminSidebar() {
