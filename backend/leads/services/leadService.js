@@ -3,6 +3,7 @@ import Lead from "../models/Lead.js";
 export const createLeadService = async (leadData) => {
 
   const existingLead = await Lead.findOne({
+    service: leadData.service,
     $or: [
       { email: leadData.email },
       { phone: leadData.phone },
@@ -11,7 +12,7 @@ export const createLeadService = async (leadData) => {
 
   if (existingLead) {
     throw new Error(
-      "A lead with this email or phone number already exists"
+      `You have already submitted a ${leadData.service} enquiry`
     );
   }
 

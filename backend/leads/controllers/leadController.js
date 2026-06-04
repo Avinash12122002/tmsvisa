@@ -9,22 +9,18 @@ import {
 export const createLead = async (req, res) => {
   try {
 
-    const lead =
-      await createLeadService(req.body);
+    const lead = await createLeadService(req.body);
 
     res.status(201).json({
       success: true,
-      message:
-        "Lead created successfully",
+      message: "Lead created successfully",
       data: lead,
     });
 
   } catch (error) {
 
     if (
-      error.message.includes(
-        "already exists"
-      )
+      error.message.includes("already submitted")
     ) {
       return res.status(409).json({
         success: false,
