@@ -5,34 +5,33 @@ export const applyJob = async (
   res
 ) => {
   try {
-    const {
-      jobId,
-      name,
-      email,
-      phone,
-    } = req.body;
 
-    if (!req.file) {
-      return res.status(400).json({
-        success: false,
-        message: "Resume Required",
-      });
-    }
+    console.log("BODY:", req.body);
+    console.log("FILE:", req.file);
 
     const application =
       await JobApplication.create({
-        jobId,
-        name,
-        email,
-        phone,
+        jobId: req.body.jobId,
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone,
         resume: req.file.path,
       });
+
+    console.log(
+      "APPLICATION SAVED:",
+      application
+    );
 
     res.status(201).json({
       success: true,
       application,
     });
+
   } catch (error) {
+
+    console.log("ERROR:", error);
+
     res.status(500).json({
       success: false,
       message: error.message,
