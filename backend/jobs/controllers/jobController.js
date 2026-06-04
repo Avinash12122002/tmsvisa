@@ -5,9 +5,22 @@ export const createJob = async (
   res
 ) => {
   try {
-    const job = await Job.create(
-      req.body
-    );
+    const {
+  postingDate,
+  country,
+  countryCode,
+  title,
+  description,
+} = req.body;
+
+const job =
+  await Job.create({
+    postingDate,
+    country,
+    countryCode,
+    title,
+    description,
+  });
 
     res.status(201).json({
       success: true,
@@ -37,7 +50,9 @@ export const getJobs = async (
     const country =
       req.query.country;
 
-    const filter = {};
+    const filter = {
+  status: "active",
+};
 
     if (country) {
       filter.country = {

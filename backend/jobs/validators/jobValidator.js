@@ -12,15 +12,15 @@ const jobValidator = (
   } = req.body;
 
   if (
-    !postingDate ||
-    !country ||
-    !countryCode ||
-    !title ||
-    !description
+    !postingDate?.trim?.() ||
+    !country?.trim?.() ||
+    !countryCode?.trim?.() ||
+    !title?.trim?.() ||
+    !description?.trim?.()
   ) {
     return res.status(400).json({
       success: false,
-      message: "All Fields Are Required",
+      message: "All fields are required",
     });
   }
 

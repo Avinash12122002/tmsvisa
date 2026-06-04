@@ -8,9 +8,12 @@ import {
   applyJob,
   getApplications,
   deleteApplication,
+  getResume,
 } from "../controllers/applicationController.js";
 
 const router = express.Router();
+
+// Public
 
 router.post(
   "/apply",
@@ -18,10 +21,17 @@ router.post(
   applyJob
 );
 
+// Admin
+
 router.get(
   "/",
   protect,
   getApplications
+);
+
+router.get(
+  "/resume/:id",
+  getResume
 );
 
 router.delete(

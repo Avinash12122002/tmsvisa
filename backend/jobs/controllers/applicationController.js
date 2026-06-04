@@ -5,32 +5,63 @@ export const applyJob = async (
   res
 ) => {
   try {
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: "Resume is required",
+      });
+    }
 
-    console.log("BODY:", req.body);
-    console.log("FILE:", req.file);
+    const {
+      jobId,
+      name,
+      email,
+      phone,
+    } = req.body;
+
+    if (
+      !jobId ||
+      !name ||
+      !email ||
+      !phone
+    ) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "All fields are required",
+      });
+    }
 
     const application =
       await JobApplication.create({
-        jobId: req.body.jobId,
-        name: req.body.name,
-        email: req.body.email,
-        phone: req.body.phone,
-        resume: req.file.path,
+        jobId,
+        name,
+        email,
+        phone,
+
+        resume: {
+          data: req.file.buffer,
+          fileName:
+            req.file.originalname,
+          contentType:
+            req.file.mimetype,
+        },
       });
 
     console.log(
       "APPLICATION SAVED:",
-      application
+      application._id
     );
 
     res.status(201).json({
       success: true,
-      application,
+      message:
+        "Application Submitted Successfully",
+      applicationId:
+        application._id,
     });
-
   } catch (error) {
-
-    console.log("ERROR:", error);
+    console.log(error);
 
     res.status(500).json({
       success: false,
@@ -48,6 +79,9 @@ export const getApplications =
             "jobId",
             "title country"
           )
+          .select(
+            "-resume.data"
+          )
           .sort({
             createdAt: -1,
           });
@@ -56,6 +90,43 @@ export const getApplications =
         success: true,
         applications,
       });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  };
+
+export const getResume =
+  async (req, res) => {
+    try {
+      const application =
+        await JobApplication.findById(
+          req.params.id
+        );
+
+      if (!application) {
+        return res.status(404).json({
+          success: false,
+          message:
+            "Application Not Found",
+        });
+      }
+
+      res.set(
+        "Content-Type",
+        application.resume.contentType
+      );
+
+      res.set(
+        "Content-Disposition",
+        `inline; filename="${application.resume.fileName}"`
+      );
+
+      res.send(
+        application.resume.data
+      );
     } catch (error) {
       res.status(500).json({
         success: false,
