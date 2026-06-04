@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getApplications, deleteApplication } from "../api/applicationApi";
+import { getApplications, deleteApplication, getResumeUrl, } from "../api/applicationApi";
 import AdminLayout from "../../pages/admin/layouts/AdminLayout";
 
 export default function Applications() {
@@ -50,8 +50,9 @@ export default function Applications() {
         <div>
           <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">Applications</h1>
           <p className="text-sm text-gray-500 mt-0.5">
-            {applications.length} total candidate application{applications.length !== 1 ? "s" : ""}
-          </p>
+              {filtered.length} total candidate application
+              {filtered.length !== 1 ? "s" : ""}
+            </p>
         </div>
 
         {/* Stats pill */}
@@ -148,18 +149,20 @@ export default function Applications() {
                 <div className="flex items-center gap-1.5 md:justify-center">
                   <span className="md:hidden text-[10px] font-bold tracking-widest uppercase text-gray-400 w-14 shrink-0">Resume</span>
                   <a
-                    href={`https://tmsvisa.onrender.com/${item.resume}`}
+                    href={getResumeUrl(item._id)}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center gap-1.5 text-xs font-semibold
-                               text-blue-600 border border-blue-200 bg-blue-50 rounded-lg
-                               px-3 py-1.5 hover:bg-blue-100 transition-all duration-200"
+                              text-blue-600 border border-blue-200 bg-blue-50 rounded-lg
+                              px-3 py-1.5 hover:bg-blue-100 transition-all duration-200"
                   >
-                    <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                      <polyline points="14,2 14,8 20,8" />
-                    </svg>
-                    View
+                    {
+                      item.resume?.fileName
+                        ? item.resume.fileName.length > 15
+                          ? item.resume.fileName.slice(0, 15) + "..."
+                          : item.resume.fileName
+                        : "View Resume"
+                    }
                   </a>
                 </div>
 

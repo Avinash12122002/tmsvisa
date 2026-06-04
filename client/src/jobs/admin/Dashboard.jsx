@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import StatsCard from "../../components/StatsCard";
+import StatsCard from "../components/StatsCard";
 import { getDashboard } from "../api/dashboardApi";
 import AdminLayout from "../../pages/admin/layouts/AdminLayout";
 

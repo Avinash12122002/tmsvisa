@@ -139,6 +139,15 @@ export default function JobList() {
                 {/* Title */}
                 <div className="flex flex-col min-w-0">
                   <span className="text-sm font-semibold text-gray-800 truncate">{job.title}</span>
+                    <span
+                        className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                          job.status === "active"
+                            ? "bg-green-100 text-green-700"
+                            : "bg-red-100 text-red-700"
+                        }`}
+                      >
+                        {job.status}
+                      </span>
                   <span className="md:hidden text-xs text-gray-400 mt-0.5">
                     {job.country} · {new Date(job.postingDate).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}
                   </span>

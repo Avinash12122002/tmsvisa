@@ -16,6 +16,10 @@ export default function ApplyJob() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+     if (!resume) {
+    alert("Please upload your resume");
+    return;
+  }
     setLoading(true);
     const formData = new FormData();
     formData.append("jobId", id);
@@ -24,11 +28,16 @@ export default function ApplyJob() {
     formData.append("phone", form.phone);
     formData.append("resume", resume);
     try {
+      
       await applyJob(formData);
       alert("Application Submitted");
       navigate("/work-opportunity");
     } catch (error) {
       console.log(error);
+      alert(
+    error?.response?.data?.message ||
+    "Failed to submit application"
+  );
     } finally {
       setLoading(false);
     }
