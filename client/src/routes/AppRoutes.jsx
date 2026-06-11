@@ -59,6 +59,7 @@ const Settings = lazy(() => import("../pages/admin/Settings"));
 // ======================
 
 import CountryDescriptions from "../pages/CountryDescriptions/CountryDescriptions";
+import Dashboard from "../jobs/admin/Dashboard";
 
 const VisaFormRouter = lazy(() => import("./VisaFormRouter"));
 
@@ -92,7 +93,9 @@ const AppRoutes = () => {
               DEFAULT
           ====================== */}
 
-        <Route path="/" element={<Navigate to="/login" />} />
+        {/* <Route path="/" element={<Navigate to="/login" />} /> */}
+
+        <Route path="/" element={<Navigate to="/dashboard" />} />
 
         {/* ======================
               AUTH ROUTES
@@ -127,9 +130,10 @@ const AppRoutes = () => {
         <Route
           path="/dashboard"
           element={
-            <ProtectedRoute>
-              <UserDashboard />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            //   <UserDashboard />
+            // </ProtectedRoute>
+            <UserDashboard />
           }
         />
 
@@ -140,9 +144,10 @@ const AppRoutes = () => {
         <Route
           path="/country/:countryName"
           element={
-            <ProtectedRoute>
-              <CountryDescriptions />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            //   <CountryDescriptions />
+            // </ProtectedRoute>
+            <CountryDescriptions />
           }
         />
 
@@ -153,9 +158,10 @@ const AppRoutes = () => {
         <Route
           path="/visa-form/:countryName"
           element={
-            <ProtectedRoute>
-              <VisaFormRouter />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            //   <VisaFormRouter />
+            // </ProtectedRoute>
+            <VisaFormRouter />
           }
         />
 

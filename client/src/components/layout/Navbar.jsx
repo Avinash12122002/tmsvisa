@@ -9,23 +9,23 @@ const Navbar = () => {
   const navLinks = [
     {
       name: "Home",
-      path: "http://growworld-tmsvisa.local/",
+      path: "https://mediumseagreen-wallaby-486481.hostingersite.com/",
     },
     {
-      name: "About",
-      path: "http://growworld-tmsvisa.local/global-recruitment-agency/",
+      name: "Visa Ai",
+      path: "https://mediumseagreen-wallaby-486481.hostingersite.com/visa-ai/",
     },
     {
-      name: "Services",
-      path: "http://growworld-tmsvisa.local/global-recruitment-services/",
+      name: "Work Visa",
+      path: "https://mediumseagreen-wallaby-486481.hostingersite.com/work-visa/",
     },
     {
-      name: "Blog",
-      path: "http://growworld-tmsvisa.local/global-recruitment-blog/",
+      name: "Turist Visa",
+      path: "https://mediumseagreen-wallaby-486481.hostingersite.com/tourist-visa/",
     },
     {
-      name: "Contact",
-      path: "http://growworld-tmsvisa.local/contact/",
+      name: "Visa Courses",
+      path: "https://mediumseagreen-wallaby-486481.hostingersite.com/visa-courses/",
     },
   ];
 
@@ -68,18 +68,19 @@ const Navbar = () => {
         </div>
 
         {/* RIGHT */}
-        <div className="flex items-center gap-4">
+        
+        {/* <div className="flex items-center gap-4"> */}
           {/* USER NAME */}
-          <div className="hidden lg:flex flex-col leading-tight">
-            <span className="text-xs text-gray-400">Welcome back</span>
+          {/* <div className="hidden lg:flex flex-col leading-tight"> */}
+            {/* <span className="text-xs text-gray-400">Welcome back</span>
 
             <span className="text-sm font-semibold text-gray-800">
               {user?.name}
-            </span>
-          </div>
+            </span> */}
+          {/* </div> */}
 
           {/* PROFILE */}
-          <div className="relative group">
+          {/* <div className="relative group">
             <button
               className="
                 h-11
@@ -101,10 +102,10 @@ const Navbar = () => {
               <span className="text-sm font-semibold">Account</span>
 
               <ChevronDown size={16} />
-            </button>
+            </button> */}
 
             {/* DROPDOWN */}
-            <div
+            {/* <div
               className="
                 absolute
                 right-0
@@ -124,18 +125,18 @@ const Navbar = () => {
                 overflow-hidden
                 z-50
               "
-            >
+            > */}
               {/* USER INFO */}
-              <div className="px-5 py-4 border-b border-gray-100">
+              {/* <div className="px-5 py-4 border-b border-gray-100">
                 <h3 className="font-semibold text-gray-900">{user?.name}</h3>
 
                 <p className="text-sm text-gray-500 break-all mt-1">
                   {user?.email}
                 </p>
-              </div>
+              </div> */}
 
               {/* DASHBOARD */}
-              <Link
+              {/* <Link
                 to="/dashboard"
                 className="
                   block
@@ -149,10 +150,10 @@ const Navbar = () => {
                 "
               >
                 Dashboard
-              </Link>
+              </Link> */}
 
               {/* LOGOUT */}
-              <button
+              {/* <button
                 onClick={() => {
                   logout();
                   navigate("/login");
@@ -173,10 +174,10 @@ const Navbar = () => {
               >
                 <LogOut size={16} />
                 Logout
-              </button>
-            </div>
-          </div>
-        </div>
+              </button> */}
+            {/* </div> */}
+          {/* </div> */}
+        {/* </div> */}
       </div>
     </nav>
   );
