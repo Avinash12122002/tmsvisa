@@ -87,7 +87,7 @@ export default function JobTable({ jobs }) {
                   Description
                 </span>
                 <button
-                  onClick={() => navigate(`/job/${job._id}`)}
+                  onClick={() => window.location.href = `https://tmsvisa.vercel.app/job/${job._id}`}
                   className="text-xs font-semibold text-gray-500 border border-gray-200 rounded-lg
                              px-3 py-1.5 hover:border-red-500 hover:text-red-600
                              transition-all duration-200 whitespace-nowrap"
@@ -99,7 +99,7 @@ export default function JobTable({ jobs }) {
               {/* ── APPLY BUTTON ── */}
               <div className="md:px-5 md:py-4 md:flex md:justify-center">
                 <button
-                  onClick={() => navigate(`/jobs/apply/${job._id}`)}
+                  onClick={() =>window.location.href=`https://tmsvisa.vercel.app/jobs/apply/${job._id}`}
                   className="w-full md:w-auto bg-red-600 hover:bg-red-700 active:scale-95
                              text-white text-xs font-bold tracking-wide
                              px-5 py-2.5 rounded-lg shadow-sm shadow-red-200
