@@ -31,7 +31,8 @@ export default function ApplyJob() {
       
       await applyJob(formData);
       alert("Application Submitted");
-      navigate("/work-opportunity");
+      window.top.location.href =
+  "https://mediumseagreen-wallaby-486481.hostingersite.com/work-visa/";
     } catch (error) {
       console.log(error);
       alert(
