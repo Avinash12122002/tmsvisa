@@ -202,7 +202,7 @@ const RefundPolicyPage = () => {
 
                 <div >
                   <p>
-                    To request a cancellation, customers may contact Teleport
+                    To request a cancellation, customers may contact TMS
                     Support through WhatsApp or email.
                   </p>
 
@@ -222,7 +222,7 @@ const RefundPolicyPage = () => {
 
                 <div >
                   <p>
-                    Once Teleport begins preliminary work on an order, and as
+                    Once TMS begins preliminary work on an order, and as
                     the application progresses towards submission, the
                     refundable amount reduces proportionately based on the
                     effort already invested by the team.
@@ -257,7 +257,7 @@ const RefundPolicyPage = () => {
                   </p>
 
                   <p>
-                    In the event of a no-show, Teleport will assist customers in
+                    In the event of a no-show, TMS will assist customers in
                     securing a new appointment once the applicable rescheduling
                     fee is paid by the customer.
                   </p>
@@ -294,7 +294,7 @@ const RefundPolicyPage = () => {
                   </p>
 
                   <p>
-                    In cases of proven operational error from Teleport’s side,
+                    In cases of proven operational error from TMS’s side,
                     the service fee may be reconsidered for a refund on a
                     case-by-case basis.
                   </p>
@@ -320,7 +320,7 @@ const RefundPolicyPage = () => {
                 </h3>
 
                 <p>
-                  Teleport reserves the right to modify this Cancellation and
+                  TMS reserves the right to modify this Cancellation and
                   Refund Policy at any time without prior notice in order to
                   remain aligned with operational processes and external agency
                   guidelines.
