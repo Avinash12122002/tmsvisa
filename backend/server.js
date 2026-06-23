@@ -68,13 +68,19 @@ app.use(helmet());
 
 app.use(
   cors({
-     origin: true,
-
+    origin: [
+      "https://tms-frontend.tmsvisa.com",
+      "https://tmsvisa.com",
+      "https://www.tmsvisa.com",
+      "http://localhost:5173",
+    ],
     credentials: true,
-
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
+
+// app.options("*", cors());
 // =====================================
 // STATIC UPLOADS
 // =====================================
