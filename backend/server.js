@@ -80,8 +80,6 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
-app.options("*", cors());
 // =====================================
 // STATIC UPLOADS
 // =====================================
