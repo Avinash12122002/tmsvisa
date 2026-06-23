@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://tmsvisa.onrender.com/api/job-applications",
+  baseURL: "https://tms-backend.tmsvisa.com/api/job-applications",
 });
 
 const getAuthConfig = () => ({
@@ -34,4 +34,4 @@ export const deleteApplication = async (id) => {
 };
 
 export const getResumeUrl = (id) =>
-  `https://tmsvisa.onrender.com/api/job-applications/resume/${id}`;
+  `https://tms-backend.tmsvisa.com/api/job-applications/resume/${id}`;

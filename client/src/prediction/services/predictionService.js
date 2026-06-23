@@ -4,7 +4,7 @@ import axios from "axios";
 // AXIOS INSTANCE
 // ══════════════════════════════════════════════
 const predictionAPI = axios.create({
-  baseURL: "https://tmsvisa.onrender.com/api/prediction",
+  baseURL: "https://tms-backend.tmsvisa.com/api/prediction",
   withCredentials: true,
 });
 

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://tmsvisa.onrender.com/api/jobs",
+  baseURL: "https://tms-backend.tmsvisa.com/api/jobs",
 });
 
 const getAuthConfig = () => {
