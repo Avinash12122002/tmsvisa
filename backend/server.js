@@ -70,7 +70,7 @@ app.use(helmet());
 app.use(
   cors({
     origin: [
-      "https://tms-frontend.tmsvisa.com/api",
+      "https://tms-frontend.tmsvisa.com/",
       "https://tmsvisa.com",
       "https://www.tmsvisa.com",
       "http://localhost:5173",
