@@ -23,6 +23,8 @@ import dashboardRoutes from "./jobs/routes/dashboardRoutes.js";
 import errorHandler from "./middleware/errorMiddleware.js";
 import leadRoutes from "./leads/routes/leadRoutes.js";
 
+import paymentRoutes from "./routes/paymentRoutes.js";
+
 dotenv.config();
 
 const app = express();
@@ -167,6 +169,8 @@ app.use("/api/job-applications", jobApplicationRoutes);
 app.use("/api/job-dashboard", dashboardRoutes);
 
 app.use("/api/leads", leadRoutes);
+
+app.use("/api/payment", paymentRoutes);
 // ======================
 // 404 ROUTE HANDLER
 // ======================
