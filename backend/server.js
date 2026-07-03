@@ -18,6 +18,7 @@ import predictionRoutes from "./prediction/routes/predictionRoutes.js";
 
 import jobRoutes from "./jobs/routes/jobRoutes.js";
 import jobApplicationRoutes from "./jobs/routes/applicationRoutes.js";
+
 import dashboardRoutes from "./jobs/routes/dashboardRoutes.js";
 
 import errorHandler from "./middleware/errorMiddleware.js";
@@ -116,14 +117,23 @@ app.get(
     res.download(filePath);
   },
 );
+
 // ======================
-// RATE LIMITER
+// RATE LIMITERS
 // ======================
 
-const limiter = rateLimit({
+// General safety-net limiter — applies to every request, but set high
+// enough that normal admin-dashboard usage (several GETs per page load,
+// React dev-mode double effects, fast navigation between lead pages)
+// never trips it. This is just a DDoS/abuse backstop, not per-feature
+// protection.
+const generalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
 
-  max: 100,
+  max: 1000,
+
+  standardHeaders: true,
+  legacyHeaders: false,
 
   message: {
     success: false,
@@ -132,7 +142,45 @@ const limiter = rateLimit({
   },
 });
 
-app.use(limiter);
+app.use(generalLimiter);
+
+// Strict limiter for auth endpoints — protects against brute-force
+// login/signup attempts. Mounted directly on the auth router below,
+// so it only affects /api/auth/*.
+export const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+
+  max: 20,
+
+  standardHeaders: true,
+  legacyHeaders: false,
+
+  message: {
+    success: false,
+
+    message: "Too many attempts. Please try again later.",
+  },
+});
+
+// Moderate limiter for public form submissions — the WordPress popup
+// (consultation leads) and any public lead-creation endpoint. Stops
+// spam bots without ever touching admin-dashboard read traffic, since
+// it's mounted only on the specific POST routes in leadRoutes.js /
+// consultationRoutes.js, not here globally.
+export const publicFormLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+
+  max: 30,
+
+  standardHeaders: true,
+  legacyHeaders: false,
+
+  message: {
+    success: false,
+
+    message: "Too many submissions from this IP. Please try again later.",
+  },
+});
 
 // ======================
 // HEALTH CHECK ROUTE
@@ -150,8 +198,8 @@ app.get("/", (req, res) => {
 // API ROUTES
 // ======================
 
-app.use("/api/auth", authRoutes);
-// predictoin
+app.use("/api/auth", authLimiter, authRoutes);
+// prediction
 
 app.use("/api/prediction", predictionRoutes);
 
