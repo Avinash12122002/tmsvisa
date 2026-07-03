@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import SearchBar from "../components/SearchBar";
 import JobTable from "../components/JobTable";
 import Pagination from "../components/Pagination";
@@ -10,6 +10,7 @@ export default function WorkOpportunity() {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const pageRef = useRef(null);
 
   const fetchJobs = async () => {
     try {
@@ -21,22 +22,42 @@ export default function WorkOpportunity() {
     }
   };
 
-  useEffect(() => {
-    fetchJobs();
-  }, [currentPage, country]);
+useEffect(() => {
+  fetchJobs();
+}, [currentPage, country]);
 
-  const filteredJobs = jobs.filter((job) => {
-    const q = search.toLowerCase();
+useEffect(() => {
+  const sendHeight = () => {
+    const height = document.documentElement.scrollHeight;
 
-    return (
-      job.title?.toLowerCase().includes(q) ||
-      job.country?.toLowerCase().includes(q) ||
-      job.description?.toLowerCase().includes(q)
+    window.parent.postMessage(
+      {
+        type: "iframe-height",
+        height,
+      },
+      "*"
     );
-  });
+  };
+
+  sendHeight();
+
+  const timer = setTimeout(sendHeight, 500);
+
+  return () => clearTimeout(timer);
+}, [jobs, currentPage, search, country]);
+
+const filteredJobs = jobs.filter((job) => {
+  const q = search.toLowerCase();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    job.title?.toLowerCase().includes(q) ||
+    job.country?.toLowerCase().includes(q) ||
+    job.description?.toLowerCase().includes(q)
+  );
+});
+
+  return (
+    <div ref={pageRef} className="min-h-screen bg-gray-50">
       {/* Hero Banner */}
       <div className="relative bg-[#1A1A2E] overflow-hidden">
         <div className="absolute top-0 left-1/4 w-72 h-72 bg-red-600/20 rounded-full blur-3xl pointer-events-none" />
