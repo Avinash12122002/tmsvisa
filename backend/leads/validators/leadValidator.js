@@ -14,10 +14,10 @@ export const validateLead = (req, res, next) => {
     });
   }
 
-  if (!/^\d{10}$/.test(phone)) {
+  if (!/^\d{15}$/.test(phone)) {
     return res.status(400).json({
       success: false,
-      message: "Phone number must be 10 digits",
+      message: "Phone number must be required",
     });
   }
 
