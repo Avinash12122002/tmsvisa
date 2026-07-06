@@ -17,7 +17,7 @@ const consultationSchema = new mongoose.Schema(
     countryCode: {
       type: String,
       trim: true,
-      default: "+91",
+      default: "+61",
     },
 
     // Which of the 3 rotating popup headings the visitor saw when they submitted

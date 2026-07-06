@@ -8,10 +8,10 @@ export const validateConsultation = (req, res, next) => {
     });
   }
 
-  if (!/^\d{10}$/.test(whatsapp)) {
+  if (!/^\+?\d{2,20}$/.test(whatsapp)) {
     return res.status(400).json({
       success: false,
-      message: "WhatsApp number must be exactly 10 digits",
+      message: "WhatsApp number must be Required",
     });
   }
 
