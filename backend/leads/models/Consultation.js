@@ -8,6 +8,13 @@ const consultationSchema = new mongoose.Schema(
       trim: true,
     },
 
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true,
+    },
+
     whatsapp: {
       type: String,
       required: true,
@@ -25,9 +32,7 @@ const consultationSchema = new mongoose.Schema(
       type: String,
       trim: true,
       enum: [
-        "Book Your FREE Consultation",
-        "Book Your FREE Visa Assessment",
-        "Check Your Eligibility",
+        "Book Your FREE Consultation"
       ],
     },
 
