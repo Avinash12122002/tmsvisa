@@ -32,7 +32,7 @@ export default function ApplyJob() {
       await applyJob(formData);
       alert("Application Submitted");
       window.top.location.href =
-  "https://mediumseagreen-wallaby-486481.hostingersite.com/work-visa/";
+  "https://tmsvisa.com/work-visa/";
     } catch (error) {
       console.log(error);
       alert(

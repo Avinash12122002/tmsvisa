@@ -234,15 +234,15 @@ const Footer = () => (
 
         {/* Right — policy links */}
         <div className="flex flex-wrap gap-5 order-3">
-          <a href="https://tmsvisa.vercel.app/privacy-policy"
+          <a href="https://app.tmsvisa.com/privacy-policy"
              className="text-[12.5px] text-[#888] no-underline hover:text-white transition-colors">
             Privacy Policy
           </a>
-          <a href="https://tmsvisa.vercel.app/refund-policy"
+          <a href="https://app.tmsvisa.com/refund-policy"
              className="text-[12.5px] text-[#888] no-underline hover:text-white transition-colors">
             Refund &amp; Cancellation
           </a>
-          <a href="https://tmsvisa.vercel.app/terms"
+          <a href="https://app.tmsvisa.com/terms"
              className="text-[12.5px] text-[#888] no-underline hover:text-white transition-colors">
             Terms &amp; Conditions
           </a>

@@ -27,6 +27,10 @@ const VisaCourseLeads = lazy(
   () => import("../leads/pages/VisaCourseLeads")
 );
 
+const ConsultationLeads = lazy(
+  () => import("../leads/pages/ConsultationLeads")
+);
+
 export default function LeadsRoutes() {
   return (
     <>
@@ -80,6 +84,15 @@ export default function LeadsRoutes() {
         element={
           <AdminRoute>
             <VisaCourseLeads />
+          </AdminRoute>
+        }
+      />
+
+      <Route
+        path="/admin/leads/consultations"
+        element={
+          <AdminRoute>
+            <ConsultationLeads />
           </AdminRoute>
         }
       />

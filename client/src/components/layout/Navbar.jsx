@@ -9,23 +9,27 @@ const Navbar = () => {
   const navLinks = [
     {
       name: "Home",
-      path: "https://mediumseagreen-wallaby-486481.hostingersite.com/",
+      path: "https://tmsvisa.com/",
     },
     {
-      name: "Visa Ai",
-      path: "https://mediumseagreen-wallaby-486481.hostingersite.com/visa-ai/",
+      name: "Visa AI",
+      path: "https://tmsvisa.com/visa-ai/",
+    },
+    {
+      name: "PR Visa AI",
+      path: "https://tmsvisa.com/pr-calculator/",
     },
     {
       name: "Work Visa",
-      path: "https://mediumseagreen-wallaby-486481.hostingersite.com/work-visa/",
+      path: "https://tmsvisa.com/work-visa/",
     },
     {
       name: "Turist Visa",
-      path: "https://mediumseagreen-wallaby-486481.hostingersite.com/tourist-visa/",
+      path: "https://tmsvisa.com/tourist-visa/",
     },
     {
       name: "Visa Courses",
-      path: "https://mediumseagreen-wallaby-486481.hostingersite.com/visa-courses/",
+      path: "https://tmsvisa.com/visa-courses/",
     },
   ];
 

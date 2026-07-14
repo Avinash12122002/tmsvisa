@@ -89,7 +89,7 @@ export default function JobTable({ jobs }) {
                 <button
                   onClick={() =>
   window.top.location.href =
-    `https://tmsvisa.vercel.app/job/${job._id}`
+    `https://app.tmsvisa.com/job/${job._id}`
 }
                   className="text-xs font-semibold text-gray-500 border border-gray-200 rounded-lg
                              px-3 py-1.5 hover:border-red-500 hover:text-red-600
@@ -104,7 +104,7 @@ export default function JobTable({ jobs }) {
                 <button
                   onClick={() =>
   window.top.location.href =
-    `https://tmsvisa.vercel.app/jobs/apply/${job._id}`
+    `https://app.tmsvisa.com/jobs/apply/${job._id}`
 }
                   className="w-full md:w-auto bg-red-600 hover:bg-red-700 active:scale-95
                              text-white text-xs font-bold tracking-wide

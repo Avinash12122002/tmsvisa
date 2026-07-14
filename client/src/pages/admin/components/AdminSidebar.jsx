@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const menus = [
@@ -28,12 +28,16 @@ const menus = [
   },
 ];
 
+const SCROLL_KEY = "adminSidebarScrollTop";
+
 export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
   const location = useLocation();
 
   const [showLeads, setShowLeads] = useState(false);
 
   const [showJobs, setShowJobs] = useState(false);
+
+  const asideRef = useRef(null);
 
   useEffect(() => {
     if (location.pathname.includes("/admin/leads")) {
@@ -48,6 +52,25 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
     }
   }, [location.pathname]);
 
+  // Restore scroll position after every render (covers toggles, route
+  // changes, or any parent re-render that resets the DOM's scrollTop).
+  useEffect(() => {
+    const saved = sessionStorage.getItem(SCROLL_KEY);
+
+    if (asideRef.current && saved !== null) {
+      asideRef.current.scrollTop = Number(saved);
+    }
+  });
+
+  const handleSidebarScroll = () => {
+    if (asideRef.current) {
+      sessionStorage.setItem(
+        SCROLL_KEY,
+        String(asideRef.current.scrollTop)
+      );
+    }
+  };
+
   const closeMobileSidebar = () => {
     if (window.innerWidth < 768) {
       setSidebarOpen(false);
@@ -55,28 +78,29 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
   };
 
   const menuStyle = (path) => ({
-    display: "block",
-    padding: "14px 18px",
-    borderRadius: 12,
-    marginBottom: 8,
-    textDecoration: "none",
-    color: "#fff",
-    fontSize: 15,
-    fontWeight: location.pathname === path ? 600 : 500,
-    background: location.pathname === path ? "#2563EB" : "transparent",
-  });
-
-  const subMenuStyle = (path) => ({
-    display: "block",
-    padding: "10px 14px",
-    borderRadius: 10,
-    marginBottom: 6,
-    marginLeft: 16,
-    textDecoration: "none",
-    fontSize: 14,
-    color: location.pathname === path ? "#fff" : "#CBD5E1",
-    background: location.pathname === path ? "#1E40AF" : "transparent",
-  });
+  display: "block",
+  padding: "10px 14px",
+  borderRadius: 8,
+  marginBottom: 4,
+  textDecoration: "none",
+  color: "#fff",
+  fontSize: 13,
+  fontWeight: location.pathname === path ? 600 : 500,
+  background: location.pathname === path ? "#2563EB" : "transparent",
+  transition: "0.2s",
+});
+ const subMenuStyle = (path) => ({
+  display: "block",
+  padding: "8px 12px",
+  borderRadius: 8,
+  marginBottom: 4,
+  marginLeft: 12,
+  textDecoration: "none",
+  fontSize: 12,
+  color: location.pathname === path ? "#fff" : "#CBD5E1",
+  background: location.pathname === path ? "#1E40AF" : "transparent",
+  transition: "0.2s",
+});
 
   return (
     <>
@@ -98,12 +122,14 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
       {/* Sidebar */}
 
       <aside
+        ref={asideRef}
+        onScroll={handleSidebarScroll}
         className={`
           fixed
           top-0
           left-0
           h-screen
-          w-[280px]
+          w-[235px]
           bg-slate-950
           text-white
           overflow-y-auto
@@ -119,29 +145,34 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
         {/* Mobile Close */}
 
         <button
+          type="button"
           onClick={closeMobileSidebar}
           className="
             md:hidden
             absolute
-            top-4
-            right-4
-            text-2xl
-          "
+            top-3
+            right-3
+            text-xl
+            "
         >
           ×
         </button>
 
         {/* Logo */}
 
-        <div className="p-6 border-b border-slate-800">
-          <h1 className="text-3xl font-bold">Visa CRM</h1>
+        <div className="px-4 py-4 border-b border-slate-800">
+  <h1 className="text-xl font-bold tracking-wide">
+    Visa CRM
+  </h1>
 
-          <p className="text-slate-400 text-sm mt-1">Admin Dashboard</p>
-        </div>
+  <p className="text-slate-400 text-xs mt-1">
+    Admin Dashboard
+  </p>
+</div>
 
         {/* Menu Area */}
 
-        <div className="p-4">
+        <div className="p-3">
           {menus.map((menu) => (
             <Link
               key={menu.path}
@@ -156,6 +187,7 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
           {/* Leads */}
 
           <button
+            type="button"
             onClick={() => setShowLeads(!showLeads)}
             className="
               w-full
@@ -163,12 +195,15 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
               justify-between
               items-center
               bg-slate-800
-              px-4
-              py-3
-              rounded-xl
-              mt-4
-              mb-2
-            "
+              px-3
+              py-2
+              rounded-lg
+              mt-3
+              mb-1
+              text-sm
+              hover:bg-slate-700
+              transition
+              "
           >
             <span>🎯 Leads</span>
 
@@ -185,13 +220,13 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
                 Lead Dashboard
               </Link>
 
-              <Link
+              {/* <Link
                 to="/admin/leads"
                 style={subMenuStyle("/admin/leads")}
                 onClick={closeMobileSidebar}
               >
                 All Leads
-              </Link>
+              </Link> */}
 
               <Link
                 to="/admin/leads/work-visa"
@@ -217,12 +252,20 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
                 Visa AI Leads
               </Link>
 
-              <Link
+              {/* <Link
                 to="/admin/leads/visa-courses"
                 style={subMenuStyle("/admin/leads/visa-courses")}
                 onClick={closeMobileSidebar}
               >
                 Visa Course Leads
+              </Link> */}
+
+              <Link
+                to="/admin/leads/consultations"
+                style={subMenuStyle("/admin/leads/consultations")}
+                onClick={closeMobileSidebar}
+              >
+                Consultation Leads
               </Link>
             </div>
           )}
@@ -230,17 +273,21 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
           {/* Jobs */}
 
           <button
+            type="button"
             onClick={() => setShowJobs(!showJobs)}
-            className="
-              w-full
-              flex
-              justify-between
-              items-center
-              bg-slate-800
-              px-4
-              py-3
-              rounded-xl
-              mb-2
+           className="
+            w-full
+            flex
+            justify-between
+            items-center
+            bg-slate-800
+            px-3
+            py-2
+            rounded-lg
+            mb-1
+            text-sm
+            hover:bg-slate-700
+            transition
             "
           >
             <span>💼 Jobs</span>

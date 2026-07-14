@@ -1,39 +1,44 @@
-// pages/AllLeads.jsx
 import AdminLayout from "../../pages/admin/layouts/AdminLayout";
 
-import useLeads from "../hooks/useLeads";
+import useConsultations from "../hooks/useConsultations";
 import useLeadsListPage from "../hooks/useLeadsListPage";
 
-import LeadTable from "../components/LeadTable";
-import UpdateLeadModal from "../components/UpdateLeadModal";
+import ConsultationTable from "../components/ConsultationTable";
+import UpdateConsultationModal from "../components/UpdateConsultationModal";
 
-import { deleteLead } from "../api/leadApi";
+import {
+  deleteConsultation,
+} from "../api/consultationApi";
 
-export default function AllLeads() {
-
-  const { leads, loading, refresh } = useLeads();
+export default function ConsultationLeads() {
 
   const {
-    selectedItem: selectedLead,
-    setSelectedItem: setSelectedLead,
+    consultations,
+    loading,
+    refresh,
+  } = useConsultations();
+
+  const {
+    selectedItem: selectedConsultation,
+    setSelectedItem: setSelectedConsultation,
     search,
     setSearch,
     page,
     totalPages,
     goToPrevPage,
     goToNextPage,
-    filteredItems: filteredLeads,
-    paginatedItems: paginatedLeads,
+    filteredItems: filteredConsultations,
+    paginatedItems: paginatedConsultations,
     pendingDeleteId,
     requestDelete,
     cancelDelete,
     confirmDelete,
     deletingId,
   } = useLeadsListPage({
-    items: leads,
-    deleteFn: deleteLead,
+    items: consultations,
+    deleteFn: deleteConsultation,
     refresh,
-    searchFields: ["name", "email", "phone", "country", "service"],
+    searchFields: ["name", "whatsapp"],
   });
 
   return (
@@ -46,19 +51,19 @@ export default function AllLeads() {
           <div>
 
             <h1 className="text-4xl font-bold text-slate-800">
-              All Leads
+              Consultation Leads
             </h1>
 
             <p className="text-gray-500 mt-2">
-              Manage all incoming leads
+              Leads captured from the site-wide popup form
             </p>
 
           </div>
 
           {!loading && (
             <div className="bg-white px-4 py-2 rounded-xl shadow text-sm text-slate-600 font-medium">
-              {filteredLeads.length} of {(leads || []).length} lead
-              {(leads || []).length === 1 ? "" : "s"}
+              {filteredConsultations.length} of {(consultations || []).length}{" "}
+              lead{(consultations || []).length === 1 ? "" : "s"}
             </div>
           )}
 
@@ -75,7 +80,7 @@ export default function AllLeads() {
 
           <input
             type="text"
-            placeholder="Search by name, email, phone, country, or service..."
+            placeholder="Search by name or WhatsApp number..."
             value={search}
             onChange={setSearch}
             className="
@@ -111,19 +116,28 @@ export default function AllLeads() {
             ))}
           </div>
 
-        ) : filteredLeads.length === 0 ? (
+        ) : filteredConsultations.length === 0 ? (
 
-          <div className="bg-white p-10 rounded-2xl shadow text-center text-gray-500">
-            No leads found.
+          <div
+            className="
+              bg-white
+              p-10
+              rounded-2xl
+              shadow
+              text-center
+              text-gray-500
+            "
+          >
+            No consultation leads found.
           </div>
 
         ) : (
 
           <>
 
-            <LeadTable
-              leads={paginatedLeads}
-              onView={setSelectedLead}
+            <ConsultationTable
+              consultations={paginatedConsultations}
+              onView={setSelectedConsultation}
               onDelete={requestDelete}
               deletingId={deletingId}
             />
@@ -166,14 +180,14 @@ export default function AllLeads() {
 
         )}
 
-        {selectedLead && (
+        {selectedConsultation && (
 
-          <UpdateLeadModal
-            lead={selectedLead}
-            onClose={() => setSelectedLead(null)}
+          <UpdateConsultationModal
+            consultation={selectedConsultation}
+            onClose={() => setSelectedConsultation(null)}
             onUpdated={() => {
               refresh();
-              setSelectedLead(null);
+              setSelectedConsultation(null);
             }}
           />
 
@@ -186,7 +200,7 @@ export default function AllLeads() {
             <div className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-sm space-y-4">
 
               <h2 className="text-lg font-semibold text-slate-800">
-                Delete this lead?
+                Delete consultation lead?
               </h2>
 
               <p className="text-gray-500 text-sm">

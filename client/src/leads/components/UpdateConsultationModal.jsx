@@ -1,17 +1,17 @@
 import { useState } from "react";
-import { updateLead } from "../api/leadApi";
+import { updateConsultation } from "../api/consultationApi";
 
-export default function UpdateLeadModal({
-  lead,
+export default function UpdateConsultationModal({
+  consultation,
   onClose,
   onUpdated,
 }) {
-  const [status, setStatus] = useState(lead.status);
-  const [notes, setNotes] = useState(lead.notes || "");
+  const [status, setStatus] = useState(consultation.status);
+  const [notes, setNotes] = useState(consultation.notes || "");
 
   const handleUpdate = async () => {
     try {
-      await updateLead(lead._id, {
+      await updateConsultation(consultation._id, {
         status,
         notes,
       });
@@ -19,7 +19,7 @@ export default function UpdateLeadModal({
       onUpdated();
     } catch (error) {
       console.log(error);
-      alert("Failed to update lead");
+      alert("Failed to update consultation lead");
     }
   };
 
@@ -31,7 +31,7 @@ export default function UpdateLeadModal({
         <div className="flex justify-between items-center mb-4">
 
           <h2 className="text-lg font-semibold">
-            Lead Details
+            Consultation Lead
           </h2>
 
           <button
@@ -47,33 +47,34 @@ export default function UpdateLeadModal({
 
           <div>
             <span className="font-semibold">Name</span>
-            <p className="truncate">{lead.name}</p>
-          </div>
-
-          <div>
-            <span className="font-semibold">Email</span>
-            <p className="truncate">{lead.email}</p>
-          </div>
-
-          <div>
-            <span className="font-semibold">Phone</span>
-            <p>{lead.phone}</p>
+            <p className="truncate">{consultation.name}</p>
           </div>
 
           <div>
             <span className="font-semibold">WhatsApp</span>
-            <p>{lead.whatsapp}</p>
+            <p>
+              {consultation.countryCode} {consultation.whatsapp}
+            </p>
           </div>
 
-          <div>
-            <span className="font-semibold">Country</span>
-            <p>{lead.country}</p>
+          <div className="col-span-2">
+            <span className="font-semibold">Submitted</span>
+            <p>{new Date(consultation.createdAt).toLocaleString()}</p>
           </div>
 
-          <div>
-            <span className="font-semibold">Service</span>
-            <p className="truncate">{lead.service}</p>
+          {/* Uncomment if needed
+
+          <div className="col-span-2">
+            <span className="font-semibold">Popup Heading</span>
+            <p>{consultation.heading || "-"}</p>
           </div>
+
+          <div className="col-span-2">
+            <span className="font-semibold">Source Page</span>
+            <p className="truncate">{consultation.sourceUrl || "-"}</p>
+          </div>
+
+          */}
 
         </div>
 

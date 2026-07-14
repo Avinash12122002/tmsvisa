@@ -22,7 +22,7 @@ export default function WorkOpportunity() {
     }
   };
 
-useEffect(() => {
+ useEffect(() => {
   fetchJobs();
 }, [currentPage, country]);
 
@@ -55,7 +55,6 @@ const filteredJobs = jobs.filter((job) => {
     job.description?.toLowerCase().includes(q)
   );
 });
-
   return (
     <div ref={pageRef} className="min-h-screen bg-gray-50">
       {/* Hero Banner */}
